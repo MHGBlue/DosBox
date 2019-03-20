@@ -32,6 +32,16 @@ public class CmdRmDirTest extends CmdTest {
         
         executeCommand("rmdir testDirName");
         assertEquals(numOfDir -1, drive.getCurrentDirectory().getNumberOfContainedDirectories());
-        
+        executeCommand("rmdir testDirName12");
+        assertEquals(numOfDir -1, drive.getCurrentDirectory().getNumberOfContainedDirectories());
+    }
+    
+    @Test
+    public void CmdRmDir_tryIngToDelDirectoryWhichDoesnotExist()
+    {
+    	int numOfDir =  drive.getCurrentDirectory().getNumberOfContainedDirectories();
+      
+        executeCommand("rmdir testDirName12");
+        assertEquals(numOfDir, drive.getCurrentDirectory().getNumberOfContainedDirectories());
     }
 }
