@@ -68,7 +68,7 @@ public class CommandInvoker implements IExecuteCommand {
 				}
 			}
 			// US11: Error message when pressing <enter>
-			if(cmdName != null && !("").equals(cmdName.trim())){
+			if(cmdName != null && !(("exit").equalsIgnoreCase(cmdName) || ("").equals(cmdName.trim()))){
 				outputter.printLine("\'" + cmdName + "\' is not recognized as an internal or external command,");
 				outputter.printLine("operable program or batch file.");
 			}
