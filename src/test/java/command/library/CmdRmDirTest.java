@@ -8,7 +8,6 @@ package command.library;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class CmdRmDirTest extends CmdTest {
@@ -24,25 +23,15 @@ public class CmdRmDirTest extends CmdTest {
 		this.commandInvoker.addCommand(new CmdRmDir("rmdir", this.drive));
 	}
 
-	@Ignore
     @Test
     public void CmdRmDir_DelNewDirectory()
     {
+    	int numOfDir =  drive.getCurrentDirectory().getNumberOfContainedDirectories();
         executeCommand("mkdir testDirName");
-        
-        /*Directory testDirectory = TestHelper.getDirectory(drive, Path.Combine(drive.getDriveLetter(), testDirName),
-                                                          testDirName);
-        assertSame(drive.getRootDirectory(), testDirectory.getParent());*/
-        assertEquals(numbersOfDirectoriesBeforeTest + 1, drive.getRootDirectory().getNumberOfContainedDirectories());
-        //TestHelper.assertOutputIsEmpty(testOutput);
-
+        numOfDir =  drive.getCurrentDirectory().getNumberOfContainedDirectories();
         
         executeCommand("rmdir testDirName");
-        /*testDirectory = TestHelper.getDirectory(drive, Path.Combine(drive.getDriveLetter(), testDirName),
-                testDirName);
-        assertSame(drive.getRootDirectory(), testDirectory.getParent());*/
-        assertEquals(numbersOfDirectoriesBeforeTest -1, drive.getRootDirectory().getNumberOfContainedDirectories());
-        //TestHelper.assertOutputIsEmpty(testOutput);
+        assertEquals(numOfDir -1, drive.getCurrentDirectory().getNumberOfContainedDirectories());
         
     }
 }
