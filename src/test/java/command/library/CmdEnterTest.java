@@ -52,10 +52,18 @@ public class CmdEnterTest extends CmdTest {
         TestHelper.assertContains("is not recognized as an internal or external command,\n" +
                 "operable program or batch file.", testOutput);
     }
+
     @Test
     public void ExecuteCommand_WithExitCommandName_PrintGoodbye()
     {
         executeCommand("exit");
         TestHelper.assertContains("", testOutput);
+    }
+
+    @Test
+    public void ExecuteCommandHelp_PrintCommandList()
+    {
+        executeCommand("help");
+        TestHelper.assertContains("\nPlease find command list below: ", testOutput);
     }
 }
