@@ -71,7 +71,9 @@ public class CommandInvoker implements IExecuteCommand {
 				if(("help").equalsIgnoreCase(cmdName)){
 					outputter.printLine("\nPlease find command list below: ");
 					for(Command c : this.commands) {
-						outputter.printLine("\t" + c.toString());
+						if(c != null && !("testSetup").equalsIgnoreCase(c.toString())){
+							outputter.printLine("\t" + c.toString());
+						}
 					}
 				}
 				// US11: Error message when pressing <enter>
