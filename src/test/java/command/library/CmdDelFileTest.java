@@ -25,20 +25,23 @@ public class CmdDelFileTest extends CmdTest {
 		this.commandInvoker.addCommand(new CmdDelFile("delfile", this.drive));
 	}
 
+	final String fileNameToDel = "testFile";
+
+	
     @Test
     public void CmdMkFile_CreatesNewFile()
     {
-        // given
-        final String newFileName = "testFile";
+       
 
+        System.out.println("CmdMkFile_CreatesNewFile dir "+ drive.getCurrentDirectory().getPath());
         // when
-        executeCommand("mkfile " + newFileName);
+        executeCommand("mkfile " + fileNameToDel);
         executeCommand("mkfile testfile1");
 
         // then
         assertEquals(numbersOfFilesBeforeTest + 2, drive.getCurrentDirectory().getNumberOfContainedFiles());
         TestHelper.assertOutputIsEmpty(testOutput);
-        File createdFile = TestHelper.getFile(drive, drive.getCurrentDirectory().getPath(), newFileName);
+        File createdFile = TestHelper.getFile(drive, drive.getCurrentDirectory().getPath(), fileNameToDel);
         assertNotNull(createdFile);
        // assertEquals("testFile",createdFile);
     }
@@ -47,21 +50,18 @@ public class CmdDelFileTest extends CmdTest {
     public void CmdDelFile_DeleteFile()
     {
     	int numberofFile = drive.getCurrentDirectory().getNumberOfContainedFiles();
-    	
-        // given
-        final String newFileName = "testfile1";
-
+    	 executeCommand("mkfile testfile1");
+    	 executeCommand("mkfile testfile2");
+    	 numberofFile = drive.getCurrentDirectory().getNumberOfContainedFiles();
+       
         // when
-        executeCommand("delFile " + newFileName);
+        executeCommand("delfile testfile1");
         
-        assertEquals(numberofFile , drive.getCurrentDirectory().getNumberOfContainedFiles());
+        assertEquals(numberofFile -1 , drive.getCurrentDirectory().getNumberOfContainedFiles());
         
-        /*for(FileSystemItem item:drive.getCurrentDirectory().getContent()){
-        	if(item.getName().equals("testFile") && !item.isDirectory()){
-        		fail("File testFile still exists");
-                	
-        	}
-        }*/
+        for(FileSystemItem item:drive.getCurrentDirectory().getContent()){
+        	System.out.println(item.getName());
+        }
         
     }
 

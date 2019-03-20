@@ -5,11 +5,10 @@
 
 package command.library;
 
+import command.framework.Command;
+import filesystem.FileSystemItem;
 import interfaces.IDrive;
 import interfaces.IOutputter;
-import command.framework.Command;
-import filesystem.File;
-import filesystem.FileSystemItem;
 
 class CmdDelFile extends Command {
 
@@ -32,6 +31,6 @@ class CmdDelFile extends Command {
 				 }*/
 
 		}
-
+		outputter.printLine("File not found"+fileName);
 	}
 }
