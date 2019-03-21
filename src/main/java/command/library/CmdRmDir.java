@@ -20,12 +20,6 @@ public class CmdRmDir extends Command {
 				this.getDrive().getCurrentDirectory().remove(item);
 				return;
 			}
-			
-		// Delete entire Directory 
-			/*while(root.getContent().size() > 0) {
-				     root.remove(root.getContent().get(0));
-				 }*/
-
 		}
 		outputter.printLine("Directory not found"+fileName);
 	}
