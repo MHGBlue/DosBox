@@ -40,6 +40,19 @@ public class CmdMkDirTest extends CmdTest {
     }
 
     @Test
+    public void CmdMkDir_CreateNewDirectory_withUniqueName()
+    {
+        final String testDirName = "test1";
+        executeCommand("mkdir " + testDirName);
+        executeCommand("mkdir " + testDirName);
+        Directory testDirectory = TestHelper.getDirectory(drive, Path.Combine(drive.getDriveLetter(), testDirName),
+                testDirName);
+        assertSame(drive.getRootDirectory(), testDirectory.getParent());
+        assertEquals(numbersOfDirectoriesBeforeTest + 1, drive.getRootDirectory().getNumberOfContainedDirectories());
+    }
+
+
+    @Test
     public void CmdMkDir_CreateNewDirectory_NewDirectoryIsAddedToCorrectLocation()
     {
         final String testDirName = "test1";

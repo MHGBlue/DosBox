@@ -99,4 +99,11 @@ public interface IDrive {
      * @param realPath The path to a real directory on any memory device.
      */
 	void createFromRealDirectory(String realPath);
+
+	/*
+	 * This method will always generate a unique serial Number
+	 * */
+	void generateSerialNumber();
+	String getSerialNumber();
+
 }

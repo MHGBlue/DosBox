@@ -22,14 +22,12 @@
 */
 package command.library;
 
-import filesystem.File;
 import helpers.TestHelper;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
-import static org.junit.Assert.assertNotNull;
-
-public class CmdTestSetupTest extends CmdTest {
+public class CmdLabelTest extends CmdTest {
 
     @Before
     public void setUp() {
@@ -38,19 +36,25 @@ public class CmdTestSetupTest extends CmdTest {
 
         // Add all commands which are necessary to execute this unit test
         // Important: Other commands are not available unless added here.
-        this.commandInvoker.addCommand(new CmdTestSetup("testsetup", this.drive));
+        this.commandInvoker.addCommand(new CmdLabel("label", this.drive));
     }
 
     @Test
-    public void CmdTestSetup_ValidateDirectoryStructure()
-    {
-        // when
-        executeCommand("testsetup");
+    public void CmdLabel_updateDriveLabelName_validateDriveName() {
+        final String labelName = "myTestLabelName";
 
-        // then
-        File createdFile = TestHelper.getFile(drive, drive.getRootDirectory().getPath(), "File1InRoot");
-        assertNotNull(createdFile);
-        createdFile = TestHelper.getFile(drive, drive.getRootDirectory().getPath(), "File2InRoot");
-        assertNotNull(createdFile);
+        executeCommand("label " + labelName);
+
+        assertEquals(this.drive.getLabel(), labelName);
+    }
+
+    @Test
+    public void CmdLabel_updateDriveLabelName_validateOutput() {
+        final String labelName = "myTestLabelName";
+
+        executeCommand("label C: " + labelName);
+
+        TestHelper.assertContains("Volume in drive C: is " + labelName, testOutput);
+        TestHelper.assertContains("Volume Serial Number is ", testOutput);
     }
 }

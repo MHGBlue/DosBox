@@ -33,11 +33,13 @@ public class CommandFactory {
 		// Add your commands here
 		
 	    this.commands.add(new CmdDelFile("delfile", drive));
+	    this.commands.add(new CmdDelFile("df", drive));
 		this.commands.add(new CmdCopy("cp", drive));
 		this.commands.add(new CmdCopy("copy", drive));
-		this.commands.add(new CmdTestSetup("testsetup", drive));
 		this.commands.add(new CmdRmDir("rmdir", drive));
-		
+		this.commands.add(new CmdTestSetup("testsetup", drive));
+		this.commands.add(new CmdLabel("label",drive));
+
 	}
 	
 	public ArrayList<Command> getCommandList() {

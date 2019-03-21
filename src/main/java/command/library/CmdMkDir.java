@@ -5,6 +5,7 @@
 
 package command.library;
 
+import filesystem.FileSystemItem;
 import interfaces.IDrive;
 import interfaces.IOutputter;
 import command.framework.Command;
@@ -48,12 +49,18 @@ class CmdMkDir extends Command {
     public void execute(IOutputter outputter) {
         for(int i=0 ; i<getParameterCount() ; i++)
         {
-            CreateDirectory(getParameterAt(i), this.getDrive());
+            CreateDirectory(getParameterAt(i), this.getDrive(),outputter);
         }
     }
 
-    private static void CreateDirectory(String newDirectoryName, IDrive drive) {
+    private static void CreateDirectory(String newDirectoryName, IDrive drive,IOutputter outputter) {
         Directory newDirectory = new Directory(newDirectoryName);
+        for(FileSystemItem directory : drive.getCurrentDirectory().getContent()) {
+            if(directory.isDirectory() && newDirectoryName.equals(directory.getName())) {
+                outputter.printLine("as per spoiled customer duplicate directory should not be created");
+                return;
+            }
+        }
         drive.getCurrentDirectory().add(newDirectory);
     }
 }

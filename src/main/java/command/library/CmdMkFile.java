@@ -5,6 +5,7 @@
 
 package command.library;
 
+import filesystem.FileSystemItem;
 import interfaces.IDrive;
 import interfaces.IOutputter;
 import command.framework.Command;
@@ -24,6 +25,12 @@ class CmdMkFile extends Command {
 			fileContent = this.getParameterAt(1);
 		}
 		File newFile = new File(fileName, fileContent);
+		for(FileSystemItem file : this.getDrive().getCurrentDirectory().getContent()) {
+			if(!file.isDirectory() && fileName.equals(file.getName())) {
+				outputter.printLine("as per spoiled customer duplicate files should not be created");
+				return;
+			}
+		}
 		this.getDrive().getCurrentDirectory().add(newFile);
 	}
 

@@ -41,6 +41,7 @@ public abstract class CmdTest {
      */
 	protected void createTestFileStructure() {
 		this.drive = new Drive("C");
+		this.drive.setLabel("myLabelName");
 		this.rootDir = this.drive.getRootDirectory();
 		this.fileInRoot1 = new File("FileInRoot1", "an entry");
 		this.rootDir.add(this.fileInRoot1);

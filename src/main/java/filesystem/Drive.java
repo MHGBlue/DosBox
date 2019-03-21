@@ -9,6 +9,8 @@ import interfaces.IDrive;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
+import java.util.RandomAccess;
 
 /**This class implements the access to the composition.
  * Composite-Pattern: Client<br>
@@ -23,6 +25,11 @@ public class Drive implements IDrive {
 	private String label;
 	private Directory rootDir;
 	private Directory currentDir;
+	private String serialNumber;
+
+
+
+
 
 	/**Creates a new drive and a root directory.
 	 * @param driveLetter Name of the drive. May only contain a single uppercase letter.
@@ -79,6 +86,8 @@ public class Drive implements IDrive {
 	public String getPrompt() {
 		return this.currentDir.getPath() + "> ";
 	}
+
+
 
 	/**Same as getDriveName()
 	 */
@@ -197,5 +206,20 @@ public class Drive implements IDrive {
 	
 	public void restore() {
 		// Not yet implemented
+	}
+
+	@Override
+	public void generateSerialNumber(){
+		Random r = new Random();
+		setSerialNumber(r.nextInt()+"L"+r.nextInt());
+	}
+
+	@Override
+	public String getSerialNumber() {
+		return serialNumber;
+	}
+
+	public void setSerialNumber(String serialNumber) {
+		this.serialNumber = serialNumber;
 	}
 }
